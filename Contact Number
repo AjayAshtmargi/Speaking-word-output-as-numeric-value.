@@ -1,0 +1,44 @@
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class AjayNumber {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        System.out.println(getPhoneNumber(input));
+    }
+
+    public static String getPhoneNumber(String s) {
+        HashMap<String, Integer> d = new HashMap<>();
+        d.put("zero", 0);
+        d.put("one", 1);
+        d.put("two", 2);
+        d.put("three", 3);
+        d.put("four", 4);
+        d.put("five", 5);
+        d.put("six", 6);
+        d.put("seven", 7);
+        d.put("eight", 8);
+        d.put("nine", 9);
+
+        StringBuilder res = new StringBuilder();
+        String[] t = s.split(" ");
+        int i = 0;
+        while (i < t.length) {
+            if (!t[i].equals("double") && !t[i].equals("triple")) {
+                res.append(d.get(t[i]));
+            } else {
+                String y;
+                if (t[i].equals("double")) {
+                    y = String.valueOf(d.get(t[i + 1])).repeat(2);
+                } else {
+                    y = String.valueOf(d.get(t[i + 1])).repeat(3);
+                }
+                i++;
+                res.append(y);
+            }
+            i++;
+        }
+        return res.toString();
+    }
+}
